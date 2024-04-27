@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      dataList: JSON.parse(localStorage.getItem('tasks')) === null ? [] : JSON.parse(localStorage.getItem('tasks'))
+      dataList: JSON.parse(localStorage.getItem('tasks')) || []
     }
   },
   methods: {
@@ -62,8 +62,12 @@ export default {
     }
   },
   watch: {
-    dataList(value) {
-      localStorage.setItem('tasks', JSON.stringify(value))
+    dataList: {
+      //开启深度监视, 可以监视数组里面对象属性的改变, 不开启只能监视数组的改变
+      deep: true,
+      handler(value) {
+        localStorage.setItem('tasks', JSON.stringify(value))
+      }
     }
   }
 }
