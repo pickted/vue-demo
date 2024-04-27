@@ -2,7 +2,8 @@
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <MyHeader :submitTask="submitTask"></MyHeader>
-    <MyList :dataList="dataList" :deleteTask="deleteTask" :changeFlag="changeFlag" v-show="dataList.length" :clearTask="clearTask"></MyList>
+    <MyList :dataList="dataList" :deleteTask="deleteTask" :changeFlag="changeFlag" v-show="dataList.length"
+            :clearTask="clearTask"></MyList>
   </div>
 </template>
 
@@ -20,20 +21,7 @@ export default {
   },
   data() {
     return {
-      dataList: [
-        // {
-        //   id: "001",
-        //   name: "A任务"
-        // },
-        // {
-        //   id: "002",
-        //   name: "B任务"
-        // },
-        // {
-        //   id: "003",
-        //   name: "C任务"
-        // }
-      ]
+      dataList: JSON.parse(localStorage.getItem('tasks')) === null ? [] : JSON.parse(localStorage.getItem('tasks'))
     }
   },
   methods: {
@@ -55,20 +43,27 @@ export default {
     changeFlag(flag, type, id) {
       if ("2" === type) {
         this.dataList.forEach(item => {
-          if (item.id === id){
+          if (item.id === id) {
             console.log("@@@", type, flag)
             item.flag = flag
           }
         })
 
       } else {
-        this.dataList.forEach(item => {item.flag =flag})
+        this.dataList.forEach(item => {
+          item.flag = flag
+        })
       }
     },
     clearTask() {
       this.dataList = this.dataList.filter(item => {
         return item.flag === false
       })
+    }
+  },
+  watch: {
+    dataList(value) {
+      localStorage.setItem('tasks', JSON.stringify(value))
     }
   }
 }
