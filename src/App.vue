@@ -2,7 +2,7 @@
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <MyHeader :submitTask="submitTask"></MyHeader>
-    <MyList :dataList="dataList" :deleteTask="deleteTask" :changeFlag="changeFlag" v-show="dataList.length"></MyList>
+    <MyList :dataList="dataList" :deleteTask="deleteTask" :changeFlag="changeFlag" v-show="dataList.length" :clearTask="clearTask"></MyList>
   </div>
 </template>
 
@@ -64,6 +64,11 @@ export default {
       } else {
         this.dataList.forEach(item => {item.flag =flag})
       }
+    },
+    clearTask() {
+      this.dataList = this.dataList.filter(item => {
+        return item.flag === false
+      })
     }
   }
 }

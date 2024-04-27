@@ -9,7 +9,7 @@
       <li>
         <input type="checkbox" v-model="isAll" @change="checkAll($event)"><span>已完成:{{ doneNumber }} / </span><span> 全部:{{
           dataList.length
-        }}</span>
+        }}</span><button style="float: right" @click="clearDoneTask">清除已完成任务</button>
       </li>
     </ul>
   </div>
@@ -18,13 +18,16 @@
 <script>
 export default {
   name: "MyList",
-  props: ['dataList', 'deleteTask', 'changeFlag', 'flag'],
+  props: ['dataList', 'deleteTask', 'changeFlag', 'flag', 'clearTask'],
   data() {
     return {}
   },
   methods: {
     checkAll(e) {
       this.changeFlag(e.target.checked, "1")
+    },
+    clearDoneTask() {
+      this.clearTask();
     }
   },
   computed: {
