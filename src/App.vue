@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <MyHeader @submitTask="submitTask"></MyHeader>
+    <!--    <MyHeader @submitTask="submitTask"></MyHeader>-->
+    <MyHeader></MyHeader>
     <MyList :dataList="dataList" :deleteTask="deleteTask" :changeFlag="changeFlag" v-show="dataList.length"
             :clearTask="clearTask"></MyList>
   </div>
@@ -11,7 +12,7 @@
 
 import MyHeader from './components/MyHeader.vue'
 import MyList from './components/MyList.vue'
-import {v4 as uuidv4} from "uuid";
+// import {v4 as uuidv4} from "uuid";
 
 export default {
   name: 'App',
@@ -25,14 +26,15 @@ export default {
     }
   },
   methods: {
-    submitTask(event) {
+    submitTask(addTask) {
+      console.log("我收到了数据：", addTask)
       //获取input的值
-      const val = event.target.value
-      const addTask = {
-        id: uuidv4(),
-        name: val,
-        flag: false
-      }
+      // const val = event.target.value
+      // const addTask = {
+      //   id: uuidv4(),
+      //   name: val,
+      //   flag: false
+      // }
       this.dataList.unshift(addTask)
       event.target.value = null
     },
@@ -69,6 +71,9 @@ export default {
         localStorage.setItem('tasks', JSON.stringify(value))
       }
     }
+  },
+  mounted() {
+    this.$bus.$on('sendTask', this.submitTask)
   }
 }
 </script>

@@ -7,21 +7,22 @@
 
 <script>
 
+import {v4 as uuidv4} from "uuid";
+
 export default {
   name: "MyHeader",
   // props: ['submitTask'],
   methods: {
     submitTask(event) {
-      // console.log(event)
-      // //获取input的值
-      // const val = event.target.value
-      // console.log(val)
-      // const addTask = {
-      //   id: uuidv4(),
-      //   name: val
-      // }
-      // console.log(addTask)
-      this.$emit('submitTask', event);
+      //获取input的值
+      const val = event.target.value
+      console.log(val)
+      const addTask = {
+        id: uuidv4(),
+        name: val,
+        flag: false
+      }
+      this.$bus.$emit('sendTask', addTask)
     }
   }
 }
