@@ -26,7 +26,7 @@ export default {
     }
   },
   methods: {
-    submitTask(addTask) {
+    submitTask(addTask, event) {
       console.log("我收到了数据：", addTask)
       //获取input的值
       // const val = event.target.value

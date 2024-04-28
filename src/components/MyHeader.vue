@@ -22,7 +22,7 @@ export default {
         name: val,
         flag: false
       }
-      this.$bus.$emit('sendTask', addTask)
+      this.$bus.$emit('sendTask', addTask, event)
     }
   }
 }
