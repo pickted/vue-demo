@@ -9,19 +9,20 @@
 
 export default {
   name: "MyHeader",
-  props: ['submitTask'],
+  // props: ['submitTask'],
   methods: {
-    // submitTask(event) {
-    //   console.log(event)
-    //   //获取input的值
-    //   const val = event.target.value
-    //   console.log(val)
-    //   const addTask = {
-    //     id: uuidv4(),
-    //     name: val
-    //   }
-    //   console.log(addTask)
-    // }
+    submitTask(event) {
+      // console.log(event)
+      // //获取input的值
+      // const val = event.target.value
+      // console.log(val)
+      // const addTask = {
+      //   id: uuidv4(),
+      //   name: val
+      // }
+      // console.log(addTask)
+      this.$emit('submitTask', event);
+    }
   }
 }
 </script>

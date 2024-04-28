@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <MyHeader :submitTask="submitTask"></MyHeader>
+    <MyHeader @submitTask="submitTask"></MyHeader>
     <MyList :dataList="dataList" :deleteTask="deleteTask" :changeFlag="changeFlag" v-show="dataList.length"
             :clearTask="clearTask"></MyList>
   </div>
