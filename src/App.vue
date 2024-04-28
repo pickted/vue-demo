@@ -74,6 +74,9 @@ export default {
   },
   mounted() {
     this.$bus.$on('sendTask', this.submitTask)
+  },
+  beforeDestroy() {
+    this.$bus.$off('sendTask');
   }
 }
 </script>
