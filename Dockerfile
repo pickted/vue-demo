@@ -11,4 +11,6 @@ RUN npm install
 RUN pwd
 RUN ls
 
+EXPOSE 3000
+
 CMD ["npm", "run", "serve"]
