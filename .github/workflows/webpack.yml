@@ -23,10 +23,13 @@ jobs:
           npm install
 
       - name: 部署
+        run: |
+          pwd
+          ls
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: master
-#          folder: vue-demo
+          folder: vue-demo
 
 
 
