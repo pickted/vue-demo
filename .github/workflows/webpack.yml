@@ -23,9 +23,8 @@ jobs:
           npm install
 
       - name: 部署
-        run: |
-          pwd
-          ls
+      - run: pwd
+      - run: ls
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: master
