@@ -11,4 +11,4 @@ RUN npm install
 RUN pwd
 RUN ls
 
-CMD ["npm", "serve"]
+CMD ["npm", "run", "serve"]
