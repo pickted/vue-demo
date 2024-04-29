@@ -22,4 +22,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: 1471754591/vue-app latest
+          tags: 1471754591/vue-app:latest
