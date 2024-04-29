@@ -6,26 +6,31 @@ on:
   pull_request:
     branches: [ "master" ]
 
+permissions:
+  contents: write
+
 jobs:
   npm-build:
     name: npm-build工作
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [ 14.x, 16.x, 18.x ]
-
     steps:
-      - run: |
-        name: 读取仓库内容策略1
-      - uses: actions/checkout@v4
+      - name: 读取仓库内容
+        uses: actions/checkout@v4
 
       - name: 读取仓库内容策略2
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: 部署
         run: |
           npm install
-          npx webpack
+          npm run build
+          ls
+          pwd
+
+      - name: 部署
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: master
+          folder: dist
+
+
+
+
