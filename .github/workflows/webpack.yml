@@ -21,10 +21,9 @@ jobs:
       - name: 读取仓库内容策略2
         run: |
           npm install
+          ls
 
       - name: 部署
-      - run: pwd
-      - run: ls
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: master
