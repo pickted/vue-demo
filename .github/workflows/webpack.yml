@@ -21,6 +21,7 @@ jobs:
       - name: 读取仓库内容策略2
         run: |
           npm install
+          npm run build
           ls
           pwd
 
