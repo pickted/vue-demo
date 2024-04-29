@@ -8,7 +8,6 @@
   </div>
 </template>
 
-
 <script>
 
 import MyHeader from './components/MyHeader.vue'
