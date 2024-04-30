@@ -61,6 +61,13 @@ export default {
       this.dataList = this.dataList.filter(item => {
         return item.flag === false
       })
+    },
+    updateTask(item) {
+      this.dataList.forEach(f => {
+        if (f.id === item.id) {
+          f.name = item.name
+        }
+      })
     }
   },
   watch: {
@@ -74,9 +81,11 @@ export default {
   },
   mounted() {
     this.$bus.$on('sendTask', this.submitTask)
+    this.$bus.$on("sendTaskData", this.updateTask)
   },
   beforeDestroy() {
     this.$bus.$off('sendTask');
+    this.$bus.$off("sendTaskData", this.updateTask)
   }
 }
 </script>

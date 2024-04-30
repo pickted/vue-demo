@@ -20,7 +20,8 @@ export default {
       const addTask = {
         id: uuidv4(),
         name: val,
-        flag: false
+        flag: false,
+        isEdit: false
       }
       this.$bus.$emit('sendTask', addTask, event)
     }

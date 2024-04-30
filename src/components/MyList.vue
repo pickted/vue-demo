@@ -1,21 +1,25 @@
 <template>
   <div>
     <ul>
-      <li v-for="item in dataList" :key="item.id">
+      <li v-for="(item, index) in dataList" :key="item.id">
         <input type="checkbox" :checked="item.flag" v-model="item.flag"
-               @change="changeFlag(item.flag, `2`, item.id)"><span>{{ item.name }}</span>
+               @change="changeFlag(item.flag, `2`, item.id)"><span v-show="!item.isEdit">{{ item.name }}</span>
+        <input type="text" v-model="item.name" v-show="item.isEdit" ref="inputTitle" @onblur="updateTask(item)"/>
         <button @click="deleteTask($event, item.id)">删除</button>
+        <button @click="editTask(item, index)">编辑</button>
       </li>
       <li>
         <input type="checkbox" v-model="isAll" @change="checkAll($event)"><span>已完成:{{ doneNumber }} / </span><span> 全部:{{
           dataList.length
-        }}</span><button style="float: right" @click="clearDoneTask">清除已完成任务</button>
+        }}</span>
+        <button style="float: right" @click="clearDoneTask">清除已完成任务</button>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "MyList",
   props: ['dataList', 'deleteTask', 'changeFlag', 'flag', 'clearTask'],
@@ -28,6 +32,18 @@ export default {
     },
     clearDoneTask() {
       this.clearTask();
+    },
+    editTask(item, index) {
+      item.isEdit = !item.isEdit
+      if (item.isEdit) {
+        this.$nextTick(function () {
+          this.$refs.inputTitle[index].focus()
+        })
+      }
+    },
+    updateTask(item) {
+      //失去焦点才更新数据
+      this.$bus.emit("sendTaskData", item)
     }
   },
   computed: {
@@ -40,7 +56,7 @@ export default {
       })
       return doneNumber
     },
-    isAll:{
+    isAll: {
       get() {
         return this.dataList.length === this.doneNumber && this.doneNumber > 0
       },
